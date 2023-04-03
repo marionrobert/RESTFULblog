@@ -2,6 +2,8 @@
 
 {% block content %}
 {% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
     <div class="overlay"></div>
@@ -22,10 +24,12 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         
           <!-- This is where the form will go -->
+        {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
 
       </div>
     </div>
   </div>
-
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='body') }}
 {% include "footer.html" %}
 {% endblock %}
