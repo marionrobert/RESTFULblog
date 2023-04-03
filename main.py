@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditor, CKEditorField
+import datetime
 
 
 ## Delete this code:
@@ -69,10 +70,28 @@ def show_post(post_id):
     requested_post = BlogPost.query.get(post_id)
     return render_template("post.html", post=requested_post)
 
-@app.route("/new_post")
+
+@app.route("/new_post", methods=["POST", "GET"])
 def new_post():
-    form = CreatePostForm()
-    return render_template("make-post.html", form=form)
+    add_form = CreatePostForm()
+    date = datetime.datetime.now()
+    month = date.strftime("%B")
+    year = date.strftime("%Y")
+    number = date.strftime("%d")
+    if add_form.validate_on_submit():
+        new_blog_post = BlogPost(
+            title=add_form.title.data,
+            subtitle=add_form.subtitle.data,
+            date=f"{month} {number}, {year}",
+            body=add_form.body.data,
+            author=add_form.author.data,
+            img_url=add_form.img_url.data
+        )
+        db.session.add(new_blog_post)
+        db.session.commit()
+        return redirect(url_for("get_all_posts"))
+    return render_template("make-post.html", form=add_form)
+
 
 @app.route("/about")
 def about():
