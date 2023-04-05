@@ -46,7 +46,7 @@
                 {% for comment in comments:%}
                   <li>
                       <div class="commenterImage">
-                        <img src="https://freesvg.org/img/abstract-user-flat-4.png"/>
+                        <img src="{{ comment.author.email | gravatar }}"/>
                       </div>
                       <div class="commentText">
                         <p>{{ comment.body|safe }}</p>
