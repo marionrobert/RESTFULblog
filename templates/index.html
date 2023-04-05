@@ -1,14 +1,14 @@
 {% include "header.html" %}
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1470092306007-055b6797ca72?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80')">
+  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1455659817273-f96807779a8a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Angela's Blog</h1>
-            <span class="subheading">A collection of Angela's random musings.</span>
+            <h1>Marion's Blog</h1>
+            <span class="subheading">A collection of random musings.</span>
           </div>
         </div>
       </div>
@@ -31,8 +31,11 @@
           </a>
           <p class="post-meta">Posted by
             <a href="#">{{post.author}}</a>
-            on {{post.date}} <a href="{{url_for('delete_post', post_id=post.id)}}">✘</a></p>
-
+            on {{post.date}}
+          
+            <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
+          
+          </p>
         </div>
         <hr>
         {% endfor %}
@@ -40,7 +43,7 @@
 
         <!-- New Post -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{url_for('new_post')}}">Create New Post</a>
+          <a class="btn btn-primary float-right" href="{{url_for('add_new_post')}}">Create New Post</a>
         </div>
       </div>
     </div>
