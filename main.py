@@ -149,6 +149,7 @@ def logout():
 @app.route("/post/<int:post_id>", methods=["GET", "POST"])
 def show_post(post_id):
     requested_post = BlogPost.query.get(post_id)
+    all_comments = requested_post.comments
     comment_form = CommentForm()
     if comment_form.validate_on_submit():
         if current_user.is_authenticated:
@@ -163,7 +164,7 @@ def show_post(post_id):
         else:
             flash("You must be logged in to comment the post.")
             return redirect(url_for('login'))
-    return render_template("post.html", post=requested_post, current_user=current_user, form=comment_form)
+    return render_template("post.html", post=requested_post, current_user=current_user, form=comment_form, comments=all_comments)
 
 
 @app.route("/about")

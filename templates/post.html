@@ -43,15 +43,17 @@
 
           <div class="col-lg-8 col-md-10 mx-auto comment">
               <ul class="commentList">
-                <li>
-                    <div class="commenterImage">
-                      <img src="https://pbs.twimg.com/profile_images/744849215675838464/IH0FNIXk.jpg"/>
-                    </div>
-                    <div class="commentText">
-                      <p>Some comment</p>
-                      <span class="date sub-text">{{ current_user.name }}</span>
-                    </div>
-                </li>
+                {% for comment in comments:%}
+                  <li>
+                      <div class="commenterImage">
+                        <img src="https://freesvg.org/img/abstract-user-flat-4.png"/>
+                      </div>
+                      <div class="commentText">
+                        <p>{{ comment.body|safe }}</p>
+                        <span class="date sub-text">{{ comment.author.username }}</span>
+                      </div>
+                  </li>
+                {% endfor %}
               </ul>
             </div>
 
